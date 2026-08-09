@@ -1,313 +1,340 @@
-// ===============================
-// ANIMASI HATI
-// ===============================
+/* =================================
+   MEMBUAT BINTANG
+================================= */
 
-(function spawnHearts() {
-
-  const HEARTS = ['❤️', '💕', '💖', '💗', '💓', '🌸', '✨'];
-
-  const wrap = document.querySelector('.hearts-bg');
-
-  if (!wrap) return;
-
-  for (let i = 0; i < 18; i++) {
-
-    const el = document.createElement('span');
-
-    el.className = 'heart-particle';
-
-    el.textContent =
-      HEARTS[Math.floor(Math.random() * HEARTS.length)];
-
-    el.style.left = Math.random() * 100 + 'vw';
-
-    el.style.fontSize =
-      (1 + Math.random() * 1.4) + 'rem';
-
-    el.style.animationDelay =
-      (Math.random() * 8) + 's';
-
-    el.style.animationDuration =
-      (6 + Math.random() * 8) + 's';
-
-    wrap.appendChild(el);
-  }
-
-})();
+const background =
+    document.getElementById("background");
 
 
-// ===============================
-// TOMBOL TIDAK
-// ===============================
+for (let i = 0; i < 100; i++) {
 
-(function setupNoButton() {
+    const star =
+        document.createElement("div");
 
-  const btn = document.getElementById('btn-no');
+    star.classList.add("star");
 
-  if (!btn) return;
+    star.style.left =
+        Math.random() * 100 + "%";
 
-  const MARGIN = 20;
+    star.style.top =
+        Math.random() * 80 + "%";
 
-  function moveRandom() {
+    star.style.animationDelay =
+        Math.random() * 3 + "s";
 
-    const vw =
-      window.innerWidth -
-      btn.offsetWidth -
-      MARGIN * 2;
+    background.appendChild(star);
 
-    const vh =
-      window.innerHeight -
-      btn.offsetHeight -
-      MARGIN * 2;
-
-    btn.style.left =
-      (MARGIN + Math.random() * vw) + 'px';
-
-    btn.style.top =
-      (MARGIN + Math.random() * vh) + 'px';
-
-    btn.style.right = 'auto';
-
-    btn.style.bottom = 'auto';
-
-    btn.style.transition =
-      'left .25s ease, top .25s ease';
-  }
+}
 
 
-  function setInitial() {
 
-    const vw = window.innerWidth;
+/* =================================
+   TEKS HALAMAN PERTAMA
+================================= */
 
-    const vh = window.innerHeight;
-
-    btn.style.left =
-      (vw / 2 + 60) + 'px';
-
-    btn.style.top =
-      (vh * 0.72) + 'px';
-  }
+const introText =
+    document.getElementById("introText");
 
 
-  setInitial();
+const introMessage =
+    "I Have Something";
 
 
-  const FLEE_DISTANCE = 90;
+let introIndex = 0;
 
 
-  document.addEventListener('mousemove', function(e) {
+function typeIntro() {
 
-    const rect =
-      btn.getBoundingClientRect();
+    if (introIndex < introMessage.length) {
 
-    const cx =
-      rect.left + rect.width / 2;
+        introText.textContent +=
+            introMessage.charAt(introIndex);
 
-    const cy =
-      rect.top + rect.height / 2;
+        introIndex++;
 
-    const dx =
-      e.clientX - cx;
-
-    const dy =
-      e.clientY - cy;
-
-    const distance =
-      Math.sqrt(dx * dx + dy * dy);
-
-
-    if (distance < FLEE_DISTANCE) {
-
-      moveRandom();
+        setTimeout(typeIntro, 120);
 
     }
 
-  });
+}
 
 
-  btn.addEventListener('click', moveRandom);
+/* jalankan saat website dibuka */
 
-  btn.addEventListener(
-    'touchstart',
-    moveRandom,
-    { passive: true }
-  );
+typeIntro();
 
 
-  window.addEventListener(
-    'resize',
-    setInitial
-  );
 
-})();
+/* =================================
+   TOMBOL OPEN
+================================= */
 
+function openPage() {
 
-// ===============================
-// TOMBOL IYA
-// ===============================
+    const page1 =
+        document.getElementById("page1");
 
-function showYesPage() {
-
-  // Sembunyikan halaman pertama
-  document
-    .getElementById('page-main')
-    .classList.remove('active');
+    const page2 =
+        document.getElementById("page2");
 
 
-  // Tampilkan halaman kedua
-  const yesPage =
-    document.getElementById('page-yes');
+    /* sembunyikan halaman pertama */
 
-  yesPage.classList.add('active');
+    page1.style.opacity = "0";
 
 
-  // Jalankan video kedua
-  const video =
-    document.getElementById('videoYes');
+    setTimeout(function () {
 
-  if (video) {
+        page1.classList.add("hidden");
 
-    video.play().catch(function(error) {
+        page2.classList.remove("hidden");
 
-      console.log(
-        'Video tidak dapat diputar otomatis:',
-        error
-      );
+        page2.style.opacity = "0";
+
+
+        /* sedikit delay */
+
+        setTimeout(function () {
+
+            page2.style.opacity = "1";
+
+            /* mulai tulisan */
+
+            typeLove();
+
+        }, 100);
+
+    }, 1000);
+
+}
+
+
+
+/* =================================
+   I LOVE YOU BERTAHAP
+================================= */
+
+const loveText =
+    document.getElementById("loveText");
+
+
+const loveMessage =
+    "I LOVE YOU";
+
+
+let loveIndex = 0;
+
+
+function typeLove() {
+
+    if (loveIndex < loveMessage.length) {
+
+        loveText.textContent +=
+            loveMessage.charAt(loveIndex);
+
+        loveIndex++;
+
+        setTimeout(typeLove, 180);
+
+    }
+
+    else {
+
+    setTimeout(function () {
+
+        document
+            .getElementById("smallText")
+            .classList.add("show");
+
+        createFlowers();
+
+        createLoveEmojis();
+
+    }, 1000);
+
+}
+
+}
+
+
+
+/* =================================
+   MEMBUAT BUNGA
+================================= */
+
+function createFlowers() {
+
+    const garden =
+        document.getElementById("garden");
+
+
+    /*
+    Posisi bunga.
+    Angka pertama = posisi horizontal
+    Angka kedua = delay
+    */
+
+    const flowers = [
+
+    [2, 0],
+    [8, 700],
+    [14, 300],
+    [20, 1100],
+    [26, 500],
+    [32, 1400],
+    [38, 800],
+    [44, 200],
+    [50, 1000],
+    [56, 400],
+    [62, 1300],
+    [68, 600],
+    [74, 1500],
+    [80, 350],
+    [86, 900],
+    [92, 1200],
+    [97, 500]
+
+];
+
+
+    flowers.forEach(function (data) {
+
+        const flower =
+            document.createElement("div");
+
+
+        flower.classList.add("flower");
+
+
+        /*
+        posisi kiri
+        */
+
+        flower.style.left =
+            data[0] + "%";
+
+
+        /*
+        waktu kemunculan
+        */
+
+        flower.style.animationDelay =
+            data[1] + "ms";
+
+
+        /*
+        ukuran bunga dibuat
+        sedikit berbeda
+        */
+
+        const size =
+            0.7 + Math.random() * 0.5;
+
+
+        flower.style.transform =
+            "scale(" + size + ")";
+
+
+        flower.innerHTML = `
+
+            <div class="head">
+
+                <div class="petal p1"></div>
+
+                <div class="petal p2"></div>
+
+                <div class="petal p3"></div>
+
+                <div class="petal p4"></div>
+
+                <div class="petal p5"></div>
+
+                <div class="center"></div>
+
+            </div>
+
+
+            <div class="stem"></div>
+
+
+            <div class="leaf left"></div>
+
+            <div class="leaf right"></div>
+
+        `;
+
+
+        garden.appendChild(flower);
 
     });
 
-  }
-
-
-  // Jalankan confetti
-  launchConfetti();
-
 }
+/* =================================
+   MEMBUAT EMOJI LOVE
+================================= */
+
+function createLoveEmojis() {
+
+    const container =
+        document.getElementById("loveContainer");
 
 
-// ===============================
-// HALAMAN KETIGA
-// ===============================
-
-function showLovePage() {
-
-  // Sembunyikan halaman kedua
-  document
-    .getElementById('page-yes')
-    .classList.remove('active');
-
-
-  // Tampilkan halaman ketiga
-  document
-    .getElementById('page-love')
-    .classList.add('active');
-
-}
+    const emojis = [
+        "❤️",
+        "💕",
+        "💗",
+        "💖",
+        "💘",
+        "💓",
+        "💞"
+    ];
 
 
-// ===============================
-// KEMBALI KE HALAMAN AWAL
-// ===============================
+    for (let i = 0; i < 20; i++) {
 
-function goBack() {
-
-  document
-    .getElementById('page-love')
-    .classList.remove('active');
+        const love =
+            document.createElement("div");
 
 
-  document
-    .getElementById('page-main')
-    .classList.add('active');
+        love.classList.add("love-emoji");
 
 
-  // Bersihkan confetti
-  const confetti =
-    document.getElementById('confetti-wrap');
+        /* memilih emoji secara acak */
 
-  if (confetti) {
-
-    confetti.innerHTML = '';
-
-  }
-
-}
+        love.textContent =
+            emojis[
+                Math.floor(
+                    Math.random() * emojis.length
+                )
+            ];
 
 
-// ===============================
-// CONFETTI
-// ===============================
+        /* posisi horizontal acak */
 
-function launchConfetti() {
-
-  const wrap =
-    document.getElementById('confetti-wrap');
-
-  const COLORS = [
-    '#E8587A',
-    '#F7A8BB',
-    '#FFD700',
-    '#FF69B4',
-    '#B0E0E6',
-    '#98FB98',
-    '#FFA07A'
-  ];
-
-  const COUNT = 80;
+        love.style.left =
+            Math.random() * 95 + "%";
 
 
-  for (let i = 0; i < COUNT; i++) {
+        /* ukuran acak */
 
-    const el =
-      document.createElement('div');
-
-    el.className =
-      'confetti-piece';
+        love.style.fontSize =
+            (18 + Math.random() * 25) + "px";
 
 
-    el.style.left =
-      Math.random() * 100 + 'vw';
+        /* kecepatan berbeda */
+
+        love.style.animationDuration =
+            (3 + Math.random() * 3) + "s";
 
 
-    el.style.background =
-      COLORS[
-        Math.floor(
-          Math.random() * COLORS.length
-        )
-      ];
+        /* muncul satu per satu */
+
+        love.style.animationDelay =
+            (Math.random() * 4) + "s";
 
 
-    el.style.width =
-      (6 + Math.random() * 10) + 'px';
+        container.appendChild(love);
 
-
-    el.style.height =
-      (10 + Math.random() * 16) + 'px';
-
-
-    el.style.borderRadius =
-      Math.random() > 0.5
-        ? '50%'
-        : '3px';
-
-
-    el.style.animationDelay =
-      (Math.random() * 1.5) + 's';
-
-
-    el.style.animationDuration =
-      (2 + Math.random() * 3) + 's';
-
-
-    wrap.appendChild(el);
-
-  }
-
-
-  setTimeout(function() {
-
-    wrap.innerHTML = '';
-
-  }, 5500);
+    }
 
 }
