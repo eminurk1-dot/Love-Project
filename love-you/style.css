@@ -1,0 +1,578 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background: #050811;
+
+    color: white;
+
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.background {
+    position: fixed;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(65, 85, 120, 0.3),
+            transparent 40%
+        ),
+        linear-gradient(
+            #030409,
+            #080d18,
+            #101827
+        );
+
+    z-index: -1;
+}
+
+
+/* =========================
+   BINTANG
+========================= */
+
+.star {
+    position: absolute;
+
+    width: 2px;
+    height: 2px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    opacity: 0.5;
+
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+
+@keyframes twinkle {
+
+    0% {
+        opacity: 0.2;
+        transform: scale(0.7);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.4);
+    }
+
+    100% {
+        opacity: 0.2;
+        transform: scale(0.7);
+    }
+
+}
+
+
+/* =========================
+   HALAMAN
+========================= */
+
+.page {
+
+    position: fixed;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    transition: opacity 1s ease;
+
+}
+
+
+/* halaman disembunyikan */
+
+.hidden {
+    display: none;
+}
+
+
+/* =========================
+   TEKS I HAVE SOMETHING
+========================= */
+
+#introText {
+
+    min-height: 60px;
+
+    font-size: clamp(25px, 5vw, 48px);
+
+    font-weight: normal;
+
+    letter-spacing: 8px;
+
+    text-shadow:
+        0 0 10px white,
+        0 0 20px rgba(180, 200, 255, 0.8);
+
+}
+
+
+/* =========================
+   TOMBOL OPEN
+========================= */
+
+button {
+
+    margin-top: 40px;
+
+    padding: 16px 50px;
+
+    border: none;
+
+    border-radius: 40px;
+
+    background: rgba(55, 75, 110, 0.7);
+
+    color: white;
+
+    font-family: Georgia, serif;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+button:hover {
+
+    transform: scale(1.05);
+
+    background: rgba(80, 105, 150, 0.8);
+
+    box-shadow:
+        0 0 20px rgba(130, 160, 220, 0.4);
+
+}
+
+
+/* =========================
+   HALAMAN 2
+========================= */
+
+.page2 {
+
+    justify-content: flex-start;
+
+    padding-top: 28vh;
+
+}
+
+
+/* =========================
+   I LOVE YOU
+========================= */
+
+#loveText {
+
+    min-height: 100px;
+
+    font-size: clamp(40px, 10vw, 90px);
+
+    letter-spacing: 8px;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 10px white,
+        0 0 25px rgba(255, 180, 210, 0.8);
+
+}
+
+
+/* =========================
+   PESAN KECIL
+========================= */
+
+#smallText {
+
+    margin-top: 20px;
+
+    font-size: 18px;
+
+    letter-spacing: 3px;
+
+    opacity: 0;
+
+    transition: opacity 2s ease;
+
+}
+
+
+#smallText.show {
+
+    opacity: 0.9;
+
+}
+
+
+/* =========================
+   GARDEN / BUNGA
+========================= */
+
+.garden {
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+
+    height: 45%;
+
+    pointer-events: none;
+
+}
+
+
+/* =========================
+   BUNGA
+========================= */
+
+.flower {
+
+    position: absolute;
+
+    bottom: -220px;
+
+    width: 70px;
+
+    height: 220px;
+
+    animation: flowerRise 3s ease-out forwards;
+
+}
+
+
+/* bunga naik */
+
+@keyframes flowerRise {
+
+    from {
+
+        bottom: -220px;
+
+    }
+
+    to {
+
+        bottom: 0;
+
+    }
+
+}
+
+
+/* =========================
+   BATANG
+========================= */
+
+.stem {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 34px;
+
+    width: 6px;
+
+    height: 150px;
+
+    background: #3d7548;
+
+    border-radius: 10px;
+
+}
+
+
+/* =========================
+   DAUN
+========================= */
+
+.leaf {
+
+    position: absolute;
+
+    width: 40px;
+
+    height: 20px;
+
+    background: #4c8a55;
+
+    border-radius: 100% 0 100% 0;
+
+}
+
+
+.leaf.left {
+
+    left: 0;
+
+    bottom: 65px;
+
+    transform: rotate(25deg);
+
+}
+
+
+.leaf.right {
+
+    left: 34px;
+
+    bottom: 95px;
+
+    transform: rotate(150deg);
+
+}
+
+
+/* =========================
+   KEPALA BUNGA
+========================= */
+
+.head {
+
+    position: absolute;
+
+    left: 3px;
+
+    top: 5px;
+
+    width: 70px;
+
+    height: 70px;
+
+    animation: sway 3s ease-in-out infinite;
+
+}
+
+
+@keyframes sway {
+
+    0% {
+        transform: rotate(-4deg);
+    }
+
+    50% {
+        transform: rotate(4deg);
+    }
+
+    100% {
+        transform: rotate(-4deg);
+    }
+
+}
+
+
+/* =========================
+   KELOPAK
+========================= */
+
+.petal {
+
+    position: absolute;
+
+    left: 20px;
+
+    top: 12px;
+
+    width: 30px;
+
+    height: 42px;
+
+    background: linear-gradient(
+        #ffb4cf,
+        #d96c9c
+    );
+
+    border-radius: 50%;
+
+    transform-origin: 15px 23px;
+
+}
+
+
+/* posisi kelopak */
+
+.p1 {
+    transform: rotate(0deg) translateY(-16px);
+}
+
+.p2 {
+    transform: rotate(72deg) translateY(-16px);
+}
+
+.p3 {
+    transform: rotate(144deg) translateY(-16px);
+}
+
+.p4 {
+    transform: rotate(216deg) translateY(-16px);
+}
+
+.p5 {
+    transform: rotate(288deg) translateY(-16px);
+}
+
+
+/* =========================
+   TENGAH BUNGA
+========================= */
+
+.center {
+
+    position: absolute;
+
+    left: 25px;
+    top: 25px;
+
+    width: 20px;
+    height: 20px;
+
+    background: #f4d277;
+
+    border-radius: 50%;
+
+    box-shadow: 0 0 12px #f4d277;
+
+    z-index: 2;
+
+}
+
+
+/* =========================
+   HP
+========================= */
+
+@media (max-width: 600px) {
+
+    #introText {
+
+        letter-spacing: 5px;
+
+    }
+
+    #loveText {
+
+        letter-spacing: 4px;
+
+    }
+
+    button {
+
+        padding: 14px 40px;
+
+    }
+
+}
+/* =========================
+   EMOJI LOVE
+========================= */
+
+.love-container {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 35%;
+
+    pointer-events: none;
+
+    overflow: hidden;
+}
+
+
+.love-emoji {
+    position: absolute;
+
+    top: -50px;
+
+    font-size: 25px;
+
+    animation:
+        loveFall 4s ease-in-out forwards,
+        loveFloat 2s ease-in-out infinite;
+
+}
+
+
+/* Emoji turun dari atas */
+
+@keyframes loveFall {
+
+    0% {
+        top: -50px;
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 80%;
+        opacity: 0.8;
+    }
+
+}
+
+
+/* Gerakan sedikit ke kiri-kanan */
+
+@keyframes loveFloat {
+
+    0% {
+        transform: translateX(0) rotate(-10deg);
+    }
+
+    50% {
+        transform: translateX(15px) rotate(10deg);
+    }
+
+    100% {
+        transform: translateX(0) rotate(-10deg);
+    }
+
+}
