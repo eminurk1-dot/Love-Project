@@ -1,47 +1,35 @@
 /* =================================
-   MEMBUAT BINTANG
+MEMBUAT BINTANG
 ================================= */
 
-const background =
-    document.getElementById("background");
-
+const background = document.getElementById("background");
 
 for (let i = 0; i < 100; i++) {
 
-    const star =
-        document.createElement("div");
+    const star = document.createElement("div");
 
     star.classList.add("star");
 
-    star.style.left =
-        Math.random() * 100 + "%";
+    star.style.left = Math.random() * 100 + "%";
 
-    star.style.top =
-        Math.random() * 80 + "%";
+    star.style.top = Math.random() * 80 + "%";
 
     star.style.animationDelay =
         Math.random() * 3 + "s";
 
     background.appendChild(star);
-
 }
 
 
-
 /* =================================
-   TEKS HALAMAN PERTAMA
+TEKS HALAMAN PERTAMA
 ================================= */
 
-const introText =
-    document.getElementById("introText");
+const introText = document.getElementById("introText");
 
-
-const introMessage =
-    "I Have Something";
-
+const introMessage = "I Have Something";
 
 let introIndex = 0;
-
 
 function typeIntro() {
 
@@ -53,9 +41,7 @@ function typeIntro() {
         introIndex++;
 
         setTimeout(typeIntro, 120);
-
     }
-
 }
 
 
@@ -64,9 +50,8 @@ function typeIntro() {
 typeIntro();
 
 
-
 /* =================================
-   TOMBOL OPEN
+TOMBOL OPEN
 ================================= */
 
 function openPage() {
@@ -105,25 +90,20 @@ function openPage() {
         }, 100);
 
     }, 1000);
-
 }
 
 
-
 /* =================================
-   I LOVE YOU BERTAHAP
+I LOVE YOU BERTAHAP
 ================================= */
 
 const loveText =
     document.getElementById("loveText");
 
-
 const loveMessage =
     "I LOVE YOU";
 
-
 let loveIndex = 0;
-
 
 function typeLove() {
 
@@ -140,26 +120,23 @@ function typeLove() {
 
     else {
 
-    setTimeout(function () {
+        setTimeout(function () {
 
-        document
-            .getElementById("smallText")
-            .classList.add("show");
+            document
+                .getElementById("smallText")
+                .classList.add("show");
 
-        createFlowers();
+            createFlowers();
 
-        createLoveEmojis();
+            createLoveEmojis();
 
-    }, 1000);
-
+        }, 1000);
+    }
 }
-
-}
-
 
 
 /* =================================
-   MEMBUAT BUNGA
+MEMBUAT BUNGA
 ================================= */
 
 function createFlowers() {
@@ -168,33 +145,27 @@ function createFlowers() {
         document.getElementById("garden");
 
 
-    /*
-    Posisi bunga.
-    Angka pertama = posisi horizontal
-    Angka kedua = delay
-    */
-
     const flowers = [
 
-    [2, 0],
-    [8, 700],
-    [14, 300],
-    [20, 1100],
-    [26, 500],
-    [32, 1400],
-    [38, 800],
-    [44, 200],
-    [50, 1000],
-    [56, 400],
-    [62, 1300],
-    [68, 600],
-    [74, 1500],
-    [80, 350],
-    [86, 900],
-    [92, 1200],
-    [97, 500]
+        [2, 0],
+        [8, 700],
+        [14, 300],
+        [20, 1100],
+        [26, 500],
+        [32, 1400],
+        [38, 800],
+        [44, 200],
+        [50, 1000],
+        [56, 400],
+        [62, 1300],
+        [68, 600],
+        [74, 1500],
+        [80, 350],
+        [86, 900],
+        [92, 1200],
+        [97, 500]
 
-];
+    ];
 
 
     flowers.forEach(function (data) {
@@ -206,26 +177,13 @@ function createFlowers() {
         flower.classList.add("flower");
 
 
-        /*
-        posisi kiri
-        */
-
         flower.style.left =
             data[0] + "%";
 
 
-        /*
-        waktu kemunculan
-        */
-
         flower.style.animationDelay =
             data[1] + "ms";
 
-
-        /*
-        ukuran bunga dibuat
-        sedikit berbeda
-        */
 
         const size =
             0.7 + Math.random() * 0.5;
@@ -267,10 +225,11 @@ function createFlowers() {
         garden.appendChild(flower);
 
     });
-
 }
+
+
 /* =================================
-   MEMBUAT EMOJI LOVE
+MEMBUAT EMOJI LOVE
 ================================= */
 
 function createLoveEmojis() {
@@ -299,8 +258,6 @@ function createLoveEmojis() {
         love.classList.add("love-emoji");
 
 
-        /* memilih emoji secara acak */
-
         love.textContent =
             emojis[
                 Math.floor(
@@ -309,25 +266,17 @@ function createLoveEmojis() {
             ];
 
 
-        /* posisi horizontal acak */
-
         love.style.left =
             Math.random() * 95 + "%";
 
-
-        /* ukuran acak */
 
         love.style.fontSize =
             (18 + Math.random() * 25) + "px";
 
 
-        /* kecepatan berbeda */
-
         love.style.animationDuration =
             (3 + Math.random() * 3) + "s";
 
-
-        /* muncul satu per satu */
 
         love.style.animationDelay =
             (Math.random() * 4) + "s";
@@ -336,5 +285,4 @@ function createLoveEmojis() {
         container.appendChild(love);
 
     }
-
 }
