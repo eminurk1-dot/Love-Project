@@ -1,578 +1,433 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ============================================================
+   STYLE.CSS — Do You Love Me?
+   Font: Playfair Display (display) + Nunito (body)
+   Palette:
+     --bg:       #FFF0F5  (lavender blush)
+     --card:     #FFFFFF
+     --rose:     #E8587A  (tomato rose — main accent)
+     --rose-lt:  #F7A8BB  (light rose)
+     --rose-dk:  #C0395A  (hover)
+     --text:     #3D1A26
+     --muted:    #9B6375
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #FFF0F5;
+  --card:    #FFFFFF;
+  --rose:    #E8587A;
+  --rose-lt: #F7A8BB;
+  --rose-dk: #C0395A;
+  --text:    #3D1A26;
+  --muted:   #9B6375;
+  --radius:  20px;
+  --shadow:  0 8px 40px rgba(232,88,122,.18);
 }
 
-
-/* =========================
-   BODY
-========================= */
-
-body {
-    width: 100%;
-    height: 100vh;
-
-    overflow: hidden;
-
-    background: #050811;
-
-    color: white;
-
-    font-family: Georgia, "Times New Roman", serif;
+/* ── Base ── */
+html, body {
+  min-height: 100%;
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
 }
 
+/* ── Pages ── */
+.page {
+  display: none;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.page.active { display: flex; }
 
-/* =========================
-   BACKGROUND
-========================= */
-
-.background {
-    position: fixed;
-
-    width: 100%;
-    height: 100%;
-
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(65, 85, 120, 0.3),
-            transparent 40%
-        ),
-        linear-gradient(
-            #030409,
-            #080d18,
-            #101827
-        );
-
-    z-index: -1;
+/* ── Floating hearts background ── */
+.hearts-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+/* Hearts are injected by JS */
+.heart-particle {
+  position: absolute;
+  bottom: -60px;
+  font-size: 1.4rem;
+  opacity: 0;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0%   { transform: translateY(0) rotate(-15deg); opacity: .6; }
+  80%  { opacity: .3; }
+  100% { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
 }
 
-
-/* =========================
-   BINTANG
-========================= */
-
-.star {
-    position: absolute;
-
-    width: 2px;
-    height: 2px;
-
-    background: white;
-
-    border-radius: 50%;
-
-    opacity: 0.5;
-
-    animation: twinkle 3s infinite ease-in-out;
+/* ── Card ── */
+.card {
+  position: relative;
+  z-index: 1;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 48px 40px 40px;
+  max-width: 480px;
+  width: calc(100% - 32px);
+  text-align: center;
+  animation: popIn .5s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes popIn {
+  from { transform: scale(.85); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
 }
 
-
-@keyframes twinkle {
-
-    0% {
-        opacity: 0.2;
-        transform: scale(0.7);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1.4);
-    }
-
-    100% {
-        opacity: 0.2;
-        transform: scale(0.7);
-    }
-
+.emoji-top {
+  font-size: 2.8rem;
+  margin-bottom: 12px;
+  display: block;
+  animation: wiggle 2s ease-in-out infinite;
+}
+@keyframes wiggle {
+  0%,100% { transform: rotate(-8deg) scale(1); }
+  50%      { transform: rotate(8deg) scale(1.12); }
 }
 
+/* ── Question ── */
+.question {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 28px;
+}
+.question em {
+  font-style: italic;
+  color: var(--rose);
+}
 
-/* =========================
-   HALAMAN
-========================= */
+/* ── Media slot ── */
+.media-slot {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  background: #fff0f5;
+  border: 2px dashed var(--rose-lt);
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.media-slot img,
+.media-slot video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+/* Placeholder text (shown when image fails / no file set) */
+.media-slot .placeholder-text {
+  display: none;
+  padding: 24px;
+  color: var(--muted);
+  font-size: .88rem;
+  line-height: 1.6;
+}
+.media-slot.placeholder img,
+.media-slot.placeholder video { display: none; }
+.media-slot.placeholder .placeholder-text { display: block; }
+
+/* ── Buttons ── */
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+#btn-yes {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 16px 44px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--rose), #f7819a);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(232,88,122,.4);
+  transition: transform .15s, box-shadow .15s;
+}
+#btn-yes:hover {
+  transform: scale(1.07);
+  box-shadow: 0 6px 28px rgba(232,88,122,.55);
+}
+#btn-yes:active { transform: scale(.97); }
+
+#btn-no {
+  font-family: 'Nunito', sans-serif;
+  font-size: .85rem;
+  font-weight: 600;
+  padding: 10px 24px;
+  border: 2px solid var(--rose-lt);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+  /* NO button is positioned fixed so it can escape anywhere on screen */
+  position: fixed;
+}
+#btn-no:hover { border-color: var(--rose); color: var(--rose); }
+
+/* ── YES page ── */
+.yes-card { border-top: 6px solid var(--rose); }
+
+.yes-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  font-weight: 700;
+  color: var(--rose);
+  margin-bottom: 10px;
+}
+
+.yes-subtitle {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.btn-back {
+  font-family: 'Nunito', sans-serif;
+  font-size: .9rem;
+  font-weight: 600;
+  padding: 10px 28px;
+  border: 2px solid var(--rose-lt);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all .2s;
+}
+.btn-back:hover {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: #fff;
+}
+
+/* ── Confetti ── */
+.confetti-wrap {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 14px;
+  top: -20px;
+  opacity: 0;
+  border-radius: 3px;
+  animation: confettiFall linear forwards;
+}
+@keyframes confettiFall {
+  0%   { transform: translateY(0) rotate(0deg);    opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 420px) {
+  .card { padding: 36px 20px 28px; }
+  .buttons { flex-direction: column; gap: 14px; }
+  #btn-yes { width: 100%; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .heart-particle,
+  .confetti-piece,
+  .emoji-top { animation: none; }
+}
+
+/* =================================
+   ANIMASI PERPINDAHAN HALAMAN
+================================= */
 
 .page {
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.5s ease,
+              transform 0.5s ease;
+}
 
-    position: fixed;
-
-    width: 100%;
-    height: 100vh;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: center;
-
-    text-align: center;
-
-    transition: opacity 1s ease;
-
+.page.active {
+  opacity: 1;
+  transform: scale(1);
 }
 
 
-/* halaman disembunyikan */
+/* =================================
+   ANIMASI CARD
+================================= */
 
-.hidden {
-    display: none;
+.page.active .card {
+  animation: cardAppear 0.7s ease;
 }
 
+@keyframes cardAppear {
 
-/* =========================
-   TEKS I HAVE SOMETHING
-========================= */
-
-#introText {
-
-    min-height: 60px;
-
-    font-size: clamp(25px, 5vw, 48px);
-
-    font-weight: normal;
-
-    letter-spacing: 8px;
-
-    text-shadow:
-        0 0 10px white,
-        0 0 20px rgba(180, 200, 255, 0.8);
-
-}
-
-
-/* =========================
-   TOMBOL OPEN
-========================= */
-
-button {
-
-    margin-top: 40px;
-
-    padding: 16px 50px;
-
-    border: none;
-
-    border-radius: 40px;
-
-    background: rgba(55, 75, 110, 0.7);
-
-    color: white;
-
-    font-family: Georgia, serif;
-
-    font-size: 16px;
-
-    cursor: pointer;
-
-    transition: 0.3s;
-
-}
-
-
-button:hover {
-
-    transform: scale(1.05);
-
-    background: rgba(80, 105, 150, 0.8);
-
-    box-shadow:
-        0 0 20px rgba(130, 160, 220, 0.4);
-
-}
-
-
-/* =========================
-   HALAMAN 2
-========================= */
-
-.page2 {
-
-    justify-content: flex-start;
-
-    padding-top: 28vh;
-
-}
-
-
-/* =========================
-   I LOVE YOU
-========================= */
-
-#loveText {
-
-    min-height: 100px;
-
-    font-size: clamp(40px, 10vw, 90px);
-
-    letter-spacing: 8px;
-
-    font-weight: bold;
-
-    text-shadow:
-        0 0 10px white,
-        0 0 25px rgba(255, 180, 210, 0.8);
-
-}
-
-
-/* =========================
-   PESAN KECIL
-========================= */
-
-#smallText {
-
-    margin-top: 20px;
-
-    font-size: 18px;
-
-    letter-spacing: 3px;
-
+  from {
     opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
 
-    transition: opacity 2s ease;
-
-}
-
-
-#smallText.show {
-
-    opacity: 0.9;
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 
 }
 
 
-/* =========================
-   GARDEN / BUNGA
-========================= */
+/* =================================
+   ANIMASI JUDUL
+================================= */
 
-.garden {
+.page.active h1 {
+  animation: titleAppear 0.8s ease;
+}
 
-    position: absolute;
+@keyframes titleAppear {
 
-    left: 0;
-    bottom: 0;
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
 
-    width: 100%;
-
-    height: 45%;
-
-    pointer-events: none;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
 }
 
 
-/* =========================
-   BUNGA
-========================= */
+/* =================================
+   ANIMASI TEKS
+================================= */
 
-.flower {
+.page.active .yes-subtitle {
+  animation: textAppear 1s ease;
+}
 
-    position: absolute;
+@keyframes textAppear {
 
-    bottom: -220px;
+  from {
+    opacity: 0;
+  }
 
-    width: 70px;
-
-    height: 220px;
-
-    animation: flowerRise 3s ease-out forwards;
+  to {
+    opacity: 1;
+  }
 
 }
 
+/* ==============================
+   PESAN PENUTUP
+================================ */
 
-/* bunga naik */
-
-@keyframes flowerRise {
-
-    from {
-
-        bottom: -220px;
-
-    }
-
-    to {
-
-        bottom: 0;
-
-    }
-
+.final-message {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  text-align: center;
 }
 
-
-/* =========================
-   BATANG
-========================= */
-
-.stem {
-
-    position: absolute;
-
-    bottom: 0;
-
-    left: 34px;
-
-    width: 6px;
-
-    height: 150px;
-
-    background: #3d7548;
-
-    border-radius: 10px;
-
+.final-message p {
+  margin: 14px 0;
+  line-height: 1.7;
 }
 
-
-/* =========================
-   DAUN
-========================= */
-
-.leaf {
-
-    position: absolute;
-
-    width: 40px;
-
-    height: 20px;
-
-    background: #4c8a55;
-
-    border-radius: 100% 0 100% 0;
-
+.final-heart {
+  font-size: 2.2rem;
+  margin: 20px 0;
+  animation: heartBeat 1.5s infinite;
 }
 
+@keyframes heartBeat {
 
-.leaf.left {
+  0%, 100% {
+    transform: scale(1);
+  }
 
-    left: 0;
-
-    bottom: 65px;
-
-    transform: rotate(25deg);
-
-}
-
-
-.leaf.right {
-
-    left: 34px;
-
-    bottom: 95px;
-
-    transform: rotate(150deg);
+  50% {
+    transform: scale(1.2);
+  }
 
 }
+/* ==============================
+   EMOJI TERBANG HALAMAN KETIGA
+================================ */
 
-
-/* =========================
-   KEPALA BUNGA
-========================= */
-
-.head {
-
-    position: absolute;
-
-    left: 3px;
-
-    top: 5px;
-
-    width: 70px;
-
-    height: 70px;
-
-    animation: sway 3s ease-in-out infinite;
-
+#page-love {
+  position: relative;
+  overflow: hidden;
 }
 
-
-@keyframes sway {
-
-    0% {
-        transform: rotate(-4deg);
-    }
-
-    50% {
-        transform: rotate(4deg);
-    }
-
-    100% {
-        transform: rotate(-4deg);
-    }
-
+.floating-hearts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-
-/* =========================
-   KELOPAK
-========================= */
-
-.petal {
-
-    position: absolute;
-
-    left: 20px;
-
-    top: 12px;
-
-    width: 30px;
-
-    height: 42px;
-
-    background: linear-gradient(
-        #ffb4cf,
-        #d96c9c
-    );
-
-    border-radius: 50%;
-
-    transform-origin: 15px 23px;
-
+.floating-hearts::before,
+.floating-hearts::after {
+  content: "🤍  💕  🌸  💗  🤍  💕";
+  position: absolute;
+  bottom: -50px;
+  left: 10%;
+  font-size: 24px;
+  letter-spacing: 20px;
+  white-space: nowrap;
+  animation: floatingHearts 8s linear infinite;
 }
 
-
-/* posisi kelopak */
-
-.p1 {
-    transform: rotate(0deg) translateY(-16px);
+.floating-hearts::after {
+  left: 55%;
+  animation-delay: 4s;
+  font-size: 20px;
 }
 
-.p2 {
-    transform: rotate(72deg) translateY(-16px);
-}
+@keyframes floatingHearts {
 
-.p3 {
-    transform: rotate(144deg) translateY(-16px);
-}
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
 
-.p4 {
-    transform: rotate(216deg) translateY(-16px);
-}
+  15% {
+    opacity: 1;
+  }
 
-.p5 {
-    transform: rotate(288deg) translateY(-16px);
-}
+  50% {
+    transform: translateY(-400px) rotate(10deg);
+    opacity: 0.8;
+  }
 
-
-/* =========================
-   TENGAH BUNGA
-========================= */
-
-.center {
-
-    position: absolute;
-
-    left: 25px;
-    top: 25px;
-
-    width: 20px;
-    height: 20px;
-
-    background: #f4d277;
-
-    border-radius: 50%;
-
-    box-shadow: 0 0 12px #f4d277;
-
-    z-index: 2;
-
-}
-
-
-/* =========================
-   HP
-========================= */
-
-@media (max-width: 600px) {
-
-    #introText {
-
-        letter-spacing: 5px;
-
-    }
-
-    #loveText {
-
-        letter-spacing: 4px;
-
-    }
-
-    button {
-
-        padding: 14px 40px;
-
-    }
-
-}
-/* =========================
-   EMOJI LOVE
-========================= */
-
-.love-container {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 35%;
-
-    pointer-events: none;
-
-    overflow: hidden;
-}
-
-
-.love-emoji {
-    position: absolute;
-
-    top: -50px;
-
-    font-size: 25px;
-
-    animation:
-        loveFall 4s ease-in-out forwards,
-        loveFloat 2s ease-in-out infinite;
-
-}
-
-
-/* Emoji turun dari atas */
-
-@keyframes loveFall {
-
-    0% {
-        top: -50px;
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    100% {
-        top: 80%;
-        opacity: 0.8;
-    }
-
-}
-
-
-/* Gerakan sedikit ke kiri-kanan */
-
-@keyframes loveFloat {
-
-    0% {
-        transform: translateX(0) rotate(-10deg);
-    }
-
-    50% {
-        transform: translateX(15px) rotate(10deg);
-    }
-
-    100% {
-        transform: translateX(0) rotate(-10deg);
-    }
+  100% {
+    transform: translateY(-800px) rotate(-10deg);
+    opacity: 0;
+  }
 
 }

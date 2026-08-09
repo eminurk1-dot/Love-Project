@@ -1,63 +1,280 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+  <title>Untuk Kamu 🤍</title>
 
-    <title>Something For You</title>
-
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- BACKGROUND -->
-    <div class="background" id="background"></div>
+  <!-- =========================
+       HALAMAN PERTAMA
+  ========================== -->
 
+  <div id="page-main" class="page active">
 
-    <!-- =========================
-         HALAMAN PERTAMA
-    ========================== -->
+    <div class="hearts-bg"></div>
 
-    <div class="page" id="page1">
+    <div class="card">
 
-        <h1 id="introText"></h1>
+      <div class="emoji-top">🌸</div>
 
-        <button id="openButton" onclick="openPage()">
-            ✦ Open
+      <h1 class="question">
+        Aku tahu...
+        <br>
+        <em>tidak mudah untuk percaya lagi</em>
+      </h1>
+
+      <p class="yes-subtitle">
+        Setelah semua yang pernah kamu lewati,
+        <br>
+        mungkin membuka hati lagi bukan hal yang mudah.
+      </p>
+
+      <!-- VIDEO PERTAMA -->
+      <div class="media-slot">
+
+        <video autoplay loop muted playsinline>
+          <source src="video2.mp4" type="video/mp4">
+        </video>
+
+      </div>
+
+      <p class="yes-subtitle">
+        Aku tidak tahu apakah aku bisa membuat semuanya menjadi lebih baik.
+        <br><br>
+        Tapi aku ingin mencoba....
+        <strong>Boleh aku menemanimu?</strong>
+      </p>
+
+      <div class="buttons">
+
+        <button id="btn-yes" onclick="showYesPage()">
+          IYA 🤍
         </button>
+
+        <button id="btn-no">
+          TIDAK 🥺
+        </button>
+
+      </div>
 
     </div>
 
+  </div>
 
-    <!-- =========================
-         HALAMAN KEDUA
-    ========================== -->
 
-   <div class="page page2 hidden" id="page2">
+  <!-- =========================
+       HALAMAN KEDUA
+  ========================== -->
 
-    <!-- Tempat emoji love -->
-    <div class="love-container" id="loveContainer"></div>
+  <div id="page-yes" class="page">
 
-    <h1 id="loveText"></h1>
+    <div class="confetti-wrap" id="confetti-wrap"></div>
 
-    <p id="smallText">
-        A little message, just for you ♡
+    <div class="card yes-card">
+
+      <div class="emoji-top">🤍</div>
+
+      <h1 class="yes-title">
+        Terima kasih...
+      </h1>
+
+      <p class="yes-subtitle">
+
+        Terima kasih karena sudah
+        memberi aku kesempatan
+        untuk menemanimu
+
         <br><br>
-        Dunia ini rasanya jauh lebih baik kalau kamu bahagia.
-        <br>
-        So, please continue to smile and be happy every day, okay? ♡♡
-    </p>
 
-    <!-- Tempat bunga -->
-    <div class="garden" id="garden"></div>
+        Aku tahu ada bagian dari masa lalu
+        yang mungkin masih terasa sakit.
+
+        <br><br>
+
+        Dan aku tahu...
+        mungkin tidak mudah untuk
+        mempercayai seseorang lagi.
+
+      </p>
+
+
+      <!-- VIDEO KEDUA -->
+      <div class="media-slot">
+
+        <video id="videoYes" loop playsinline>
+          <source src="video1.mp4" type="video/mp4">
+        </video>
+
+      </div>
+
+
+      <p class="yes-subtitle">
+
+        Aku tidak datang untuk
+        menghapus masa lalumu.
+
+        <br><br>
+
+        Aku juga tidak ingin memaksamu
+        untuk melupakan seseorang
+        yang pernah berarti dalam hidupmu.
+
+        <br><br>
+
+        Aku cuma ingin menjadi seseorang
+        yang tetap ada ketika kamu butuh.
+
+        <br><br>
+
+        I will always be here whenever you need me,
+        if you need someone to talk 
+        i am ready to be a good listener
+
+        <strong>MY FAVORITE PERSON 
+        </strong>
+
+      </p>
+
+
+      <button class="btn-back" onclick="showLovePage()">
+        Lanjut 🤍
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       HALAMAN KETIGA
+  ========================== -->
+
+  <div id="page-love" class="page">
+
+    <div class="floating-hearts" aria-hidden="true"></div>
+
+    <div class="card yes-card">
+
+      <div class="emoji-top">💌</div>
+
+      <h1 class="yes-title">
+        Sebenarnya...
+      </h1>
+
+      <p class="yes-subtitle">
+
+        Adek mungkin sudah tau kan 
+        kalo aku suka sama kamu.
+
+        <br><br>
+
+        Tapi setelah aku tau tentang
+        masa lalu yang pernah kamu alami, 
+        jujur aku sempet galau dikit. 
+
+        <br><br>
+
+        Aku berpikir, 
+        apakah aku bisa benar-benar membuatmu
+        percaya lagi sama seseorang?
+
+        <br><br>
+
+        Aku cuma ingin kamu tau... 
+
+        <br><br>
+
+        <strong>Aku beneran suka sama kamu.</strong>
+
+        <br><br>
+
+        Kalau sekarang kamu belum bisa
+        merasakan hal yang sama,
+        aku tidak mempermasalahkan hal itu.
+
+        <br><br>
+
+        Aku juga gak marah,
+        aku gak akan memaksa adek juga,
+        dan aku juga gak minta adek buat jawab perasaanku sekarang.
+
+        <br><br>
+
+        Aku cuma ingin mengenalmu,
+        tetap ngobrol hal yang tidak jelas,
+        tetap becanda walaupun nggak pernah hehe....
+        <br><br>
+
+        Karena menurutku, 
+        perasaan itu nggak harus dipaksakan.
+
+        <br><br>
+
+       Jika suatu hari kamu bisa membuka
+       sedikit ruang untukku,
+       aku akan merasa seneng bangettt sampe jungkir balik.
+
+        <br><br>
+
+        Tapi kalo belum... 
+
+        <br>
+        <strong>Aku bakal ngerti ko.</strong>
+
+        <br>
+        <strong>I LOVE YOU🤍</strong>
+
+      </p>
+
+<div class="final-message">
+
+  <p>
+    Apa pun jawabanmu nanti,
+    aku tetap berterima kasih
+    karena pernah mengenalmu.
+  </p>
+
+  <p>
+    Dan kalau ternyata aku memang
+    harus menunggu...
+    ya sudah, aku tunggu pelan-pelan. 😅
+  </p>
+
+  <p>
+    Tapi jangan lama-lama juga,
+    nanti aku keburu tua. 😂
+  </p>
+
+  <div class="final-heart">
+    🤍
+  </div>
+
+  <p>
+    <strong>
+      Terima kasih sudah membaca
+      sampai bagian ini.
+    </strong>
+  </p>
 
 </div>
 
-    <script src="script.js"></script>
+      <button class="btn-back" onclick="goBack()">
+        Baca lagi dari awal🤍
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
 
 </body>
 
