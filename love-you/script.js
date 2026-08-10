@@ -27,7 +27,8 @@ TEKS HALAMAN PERTAMA
 
 const introText = document.getElementById("introText");
 
-const introMessage = "I Have Something";
+const introMessage =
+"I Have A Little Surprise For You";
 
 let introIndex = 0;
 
