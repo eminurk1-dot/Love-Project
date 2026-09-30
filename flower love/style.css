@@ -1,0 +1,2278 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root {
+
+    --night: #03040d;
+
+    --pink: #ff9ac5;
+
+    --pink-bright: #ffd0e3;
+
+    --purple: #b84cff;
+
+    --green: #26b85a;
+
+    --green-dark: #07511e;
+
+    --cream: #fff7fb;
+
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+html,
+body {
+
+    width: 100%;
+
+    height: 100%;
+
+    overflow: hidden;
+
+}
+
+
+body {
+
+    background: var(--night);
+
+    color: white;
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+}
+
+
+button {
+
+    font: inherit;
+
+}
+
+
+/* =====================================================
+   SCENE
+===================================================== */
+
+.scene {
+
+    position: relative;
+
+    width: 100vw;
+
+    height: 100dvh;
+
+    min-height: 520px;
+
+    overflow: hidden;
+
+    isolation: isolate;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 70%,
+            rgba(85, 26, 107, .22),
+            transparent 38%
+        ),
+
+        linear-gradient(
+            180deg,
+            #02030a 0%,
+            #050716 52%,
+            #02030a 100%
+        );
+
+}
+
+
+/* =====================================================
+   LANGIT
+===================================================== */
+
+.sky-glow {
+
+    position: absolute;
+
+    inset: auto 0 0;
+
+    height: 55%;
+
+    z-index: -3;
+
+    background:
+
+        radial-gradient(
+            ellipse at 50% 100%,
+            rgba(143, 37, 164, .28),
+            transparent 62%
+        );
+
+    filter: blur(8px);
+
+}
+
+
+.stars {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: -1;
+
+    pointer-events: none;
+
+}
+
+
+.star {
+
+    position: absolute;
+
+    width: var(--size);
+
+    height: var(--size);
+
+    left: var(--x);
+
+    top: var(--y);
+
+    border-radius: 50%;
+
+    background: white;
+
+    opacity: var(--opacity);
+
+    box-shadow:
+        0 0 8px rgba(255,255,255,.9);
+
+    animation:
+        twinkle var(--duration)
+        ease-in-out infinite alternate;
+
+    animation-delay:
+        var(--delay);
+
+}
+
+
+@keyframes twinkle {
+
+    from {
+
+        opacity: .15;
+
+        transform: scale(.65);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: scale(1.35);
+
+    }
+
+}
+
+
+/* =====================================================
+   BULAN
+===================================================== */
+
+.moon {
+
+    position: absolute;
+
+    width: 110px;
+
+    height: 110px;
+
+    right: 8%;
+
+    top: 9%;
+
+    border-radius: 50%;
+
+    opacity: .7;
+
+    background:
+
+        radial-gradient(
+            circle at 35% 35%,
+            #fff7fd,
+            #d6b9e8 60%,
+            #a66dbd
+        );
+
+    box-shadow:
+        0 0 55px
+        rgba(229, 176, 255, .2);
+
+    z-index: -2;
+
+}
+
+
+.moon::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 110px;
+
+    height: 110px;
+
+    left: 25px;
+
+    top: -8px;
+
+    border-radius: 50%;
+
+    background: #050716;
+
+}
+
+
+/* =====================================================
+   OPENING
+===================================================== */
+
+.opening {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 20;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+
+        opacity 1.2s ease,
+
+        transform 1.2s
+        cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+.opening.hide {
+
+    opacity: 0;
+
+    transform: scale(1.35);
+
+    pointer-events: none;
+
+}
+
+
+.tap-label {
+
+    margin-bottom: 45px;
+
+    color: #f8d9ff;
+
+    font-size:
+        clamp(19px, 3.2vw, 34px);
+
+    font-weight: 700;
+
+    letter-spacing: .35em;
+
+    text-indent: .35em;
+
+    text-shadow:
+
+        0 0 10px #d65cff,
+
+        0 0 30px #a91cff;
+
+    animation:
+        labelPulse 2.2s
+        ease-in-out infinite;
+
+}
+
+
+@keyframes labelPulse {
+
+    0%,
+    100% {
+
+        opacity: .65;
+
+        transform: translateY(0);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform: translateY(-4px);
+
+    }
+
+}
+
+
+.opening-hint {
+
+    margin-top: 45px;
+
+    color:
+        rgba(255,255,255,.48);
+
+    font-size: 11px;
+
+    letter-spacing: .22em;
+
+    text-transform: uppercase;
+
+}
+
+
+/* =====================================================
+   LOVE BESAR
+===================================================== */
+
+.heart-button {
+
+    position: relative;
+
+    width: 145px;
+
+    height: 145px;
+
+    border: 0;
+
+    outline: none;
+
+    cursor: pointer;
+
+    appearance: none;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #e36cff 0%,
+            #b82eff 45%,
+            #7213a6 100%
+        );
+
+    transform: rotate(-45deg);
+
+    border-radius:
+        18px
+        0
+        22px
+        18px;
+
+    box-shadow:
+
+        0 0 18px
+        rgba(207, 72, 255, .95),
+
+        0 0 48px
+        rgba(172, 42, 255, .7),
+
+        0 0 110px
+        rgba(136, 26, 220, .38);
+
+    animation:
+        heartbeat 1.15s
+        ease-in-out infinite;
+
+    transition:
+        filter .3s ease;
+
+}
+
+
+.heart-button::before,
+.heart-button::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 145px;
+
+    height: 145px;
+
+    border-radius: 50%;
+
+    background: inherit;
+
+}
+
+
+.heart-button::before {
+
+    top: -72px;
+
+    left: 0;
+
+}
+
+
+.heart-button::after {
+
+    top: 0;
+
+    left: 72px;
+
+}
+
+
+.heart-shine {
+
+    position: absolute;
+
+    z-index: 5;
+
+    width: 24px;
+
+    height: 46px;
+
+    left: 31px;
+
+    top: 10px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.7);
+
+    transform: rotate(20deg);
+
+    filter: blur(2px);
+
+}
+
+
+.heart-button:hover {
+
+    filter: brightness(1.15);
+
+}
+
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+
+        transform:
+            rotate(-45deg)
+            scale(1);
+
+    }
+
+    13% {
+
+        transform:
+            rotate(-45deg)
+            scale(1.08);
+
+    }
+
+    26% {
+
+        transform:
+            rotate(-45deg)
+            scale(1);
+
+    }
+
+    40% {
+
+        transform:
+            rotate(-45deg)
+            scale(1.06);
+
+    }
+
+    55% {
+
+        transform:
+            rotate(-45deg)
+            scale(1);
+
+    }
+
+}
+
+
+/* =====================================================
+   TAMAN
+===================================================== */
+
+.garden {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 1.5s ease;
+
+}
+
+
+.garden.show {
+
+    opacity: 1;
+
+}
+
+
+.romantic-message {
+
+    position: absolute;
+
+    z-index: 10;
+
+    top: 9%;
+
+    left: 50%;
+
+    width: min(900px, 90%);
+
+    text-align: center;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, 30px);
+
+    transition:
+
+        opacity 1.8s ease,
+
+        transform 1.8s ease;
+
+    text-shadow:
+        0 0 18px
+        rgba(255, 106, 171, .7);
+
+}
+
+
+.romantic-message.show {
+
+    opacity: 1;
+
+    transform:
+        translate(-50%, 0);
+
+}
+
+
+.romantic-message span {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ffd3e5;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(20px, 3vw, 31px);
+
+}
+
+
+.romantic-message strong {
+
+    display: block;
+
+    color: #fff0f7;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(25px, 4vw, 42px);
+
+    font-weight: 600;
+
+}
+
+
+.ground-glow {
+
+    position: absolute;
+
+    bottom: -15%;
+
+    left: 50%;
+
+    width: 90%;
+
+    height: 55%;
+
+    transform:
+        translateX(-50%);
+
+    background:
+
+        radial-gradient(
+            ellipse,
+            rgba(20, 157, 72, .3),
+            transparent 68%
+        );
+
+    filter: blur(25px);
+
+}
+
+
+.ground {
+
+    position: absolute;
+
+    left: -10%;
+
+    bottom: -12%;
+
+    width: 120%;
+
+    height: 27%;
+
+    border-radius:
+        50% 50% 0 0;
+
+    background:
+
+        radial-gradient(
+            ellipse at 50% 0%,
+            #0d6126 0%,
+            #063518 45%,
+            #020c07 75%
+        );
+
+    box-shadow:
+        0 -10px 35px
+        rgba(26, 164, 68, .13);
+
+}
+
+
+/* =====================================================
+   RUMPUT
+===================================================== */
+
+.grass {
+
+    position: absolute;
+
+    bottom: 0;
+
+    width: 12px;
+
+    height: 210px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            #158c36,
+            transparent
+        );
+
+    border-radius:
+        100% 0 100% 0;
+
+    transform-origin: bottom;
+
+    opacity: 0;
+
+    animation:
+
+        grassRise 1.7s ease forwards,
+
+        grassWave 4s
+        ease-in-out
+        1.7s infinite;
+
+}
+
+
+.grass-1 {
+
+    left: 12%;
+
+    height: 170px;
+
+    animation-delay:
+        .1s,
+        2s;
+
+    transform:
+        rotate(-18deg);
+
+}
+
+
+.grass-2 {
+
+    left: 21%;
+
+    height: 250px;
+
+    animation-delay:
+        .3s,
+        2.1s;
+
+    transform:
+        rotate(14deg);
+
+}
+
+
+.grass-3 {
+
+    right: 18%;
+
+    height: 230px;
+
+    animation-delay:
+        .5s,
+        2.2s;
+
+    transform:
+        rotate(-12deg);
+
+}
+
+
+.grass-4 {
+
+    right: 9%;
+
+    height: 170px;
+
+    animation-delay:
+        .7s,
+        2.3s;
+
+    transform:
+        rotate(18deg);
+
+}
+
+
+.grass-5 {
+
+    left: 4%;
+
+    height: 130px;
+
+    animation-delay:
+        .9s,
+        2.4s;
+
+    transform:
+        rotate(-28deg);
+
+}
+
+
+@keyframes grassRise {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scaleY(0)
+            rotate(-15deg);
+
+    }
+
+    to {
+
+        opacity: .9;
+
+    }
+
+}
+
+
+@keyframes grassWave {
+
+    0%,
+    100% {
+
+        margin-left: 0;
+
+    }
+
+    50% {
+
+        margin-left: 8px;
+
+    }
+
+}
+
+
+/* =====================================================
+   BUNGA TULIP
+===================================================== */
+
+.flowers {
+
+    position: absolute;
+
+    inset: 0;
+
+}
+
+
+.flower {
+
+    --flower-scale: 1;
+
+    position: absolute;
+
+    left: var(--left);
+
+    bottom: 7%;
+
+    width: 24px;
+
+    height: var(--stem-height);
+
+    transform:
+        scaleY(0)
+        scaleX(var(--flower-scale));
+
+    transform-origin: bottom;
+
+    animation:
+
+        stemGrow 1.8s
+        cubic-bezier(.22,.9,.25,1)
+        forwards;
+
+    animation-delay:
+        var(--delay);
+
+    z-index: 3;
+
+}
+
+
+@keyframes stemGrow {
+
+    0% {
+
+        transform:
+            scaleY(0)
+            scaleX(var(--flower-scale));
+
+    }
+
+    100% {
+
+        transform:
+            scaleY(1)
+            scaleX(var(--flower-scale));
+
+    }
+
+}
+
+
+/* =====================================================
+   BATANG
+===================================================== */
+
+.stem {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 8px;
+
+    width: 8px;
+
+    height: 100%;
+
+    border-radius: 100%;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #064016,
+            #19a943,
+            #087026
+        );
+
+    box-shadow:
+
+        2px 0 8px
+        rgba(25,180,70,.25);
+
+}
+
+/* =========================
+   DAUN TULIP REALISTIS
+========================= */
+
+.leaf {
+    position: absolute;
+
+    width: 25px;
+    height: 115px;
+
+    bottom: 32px;
+
+    opacity: 0;
+
+    z-index: 2;
+
+    transform-origin: bottom center;
+
+    background:
+        linear-gradient(
+            100deg,
+            #245b32 0%,
+            #438b49 45%,
+            #72b85b 100%
+        );
+
+    /* bentuk daun panjang dan meruncing */
+    clip-path: polygon(
+        50% 0%,
+        67% 18%,
+        78% 40%,
+        82% 62%,
+        74% 80%,
+        50% 100%,
+        39% 77%,
+        30% 55%,
+        29% 32%,
+        37% 13%
+    );
+
+    box-shadow:
+        inset -4px 0 5px
+        rgba(0,0,0,.15);
+}
+
+
+/* =========================
+   DAUN KIRI
+========================= */
+
+.leaf-left {
+
+    left: 40%;
+
+    transform:
+        rotate(-22deg)
+        scale(.82);
+
+    animation:
+        tulipLeafLeft
+        .8s
+        var(--delay)
+        forwards;
+}
+
+
+/* =========================
+   DAUN KANAN
+========================= */
+
+.leaf-right {
+
+    left: 49%;
+
+    transform:
+        rotate(22deg)
+        scale(.82);
+
+    animation:
+        tulipLeafRight
+        .8s
+        var(--delay)
+        forwards;
+}
+
+
+/* =========================
+   ANIMASI DAUN KIRI
+========================= */
+
+@keyframes tulipLeafLeft {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            rotate(-5deg)
+            scale(.2);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            rotate(-22deg)
+            scale(.82);
+    }
+}
+
+
+/* =========================
+   ANIMASI DAUN KANAN
+========================= */
+
+@keyframes tulipLeafRight {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            rotate(5deg)
+            scale(.2);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            rotate(22deg)
+            scale(.82);
+    }
+}
+
+/* =====================================================
+   KEPALA TULIP
+===================================================== */
+
+.flower-head {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: -10px;
+
+    width: 100px;
+
+    height: 95px;
+
+    transform:
+
+        translateX(-50%)
+        scale(0);
+
+    transform-origin:
+        center bottom;
+
+    animation:
+
+        tulipBloom 1.15s
+        cubic-bezier(.17,.89,.32,1.25)
+        forwards;
+
+    animation-delay:
+
+        calc(var(--delay) + 1.45s);
+
+}
+
+
+/* =====================================================
+   KELOPAK TULIP
+===================================================== */
+
+.tulip-petal {
+
+    position: absolute;
+
+    bottom: 5px;
+
+    width: 48px;
+
+    height: 78px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #ffd0df 0%,
+            #ff9fbd 35%,
+            #f16d9b 72%,
+            #d8497c 100%
+        );
+
+    border-radius:
+        55% 55% 35% 35%;
+
+    box-shadow:
+
+        inset
+        -6px -8px 10px
+        rgba(156,35,79,.18),
+
+        0 0 15px
+        rgba(255,128,176,.22);
+
+}
+
+
+/* kiri */
+
+.petal-left {
+
+    left: 2px;
+
+    transform:
+        rotate(-25deg);
+
+}
+
+
+/* tengah */
+
+.petal-center {
+
+    left: 26px;
+
+    bottom: 7px;
+
+    width: 49px;
+
+    height: 82px;
+
+    z-index: 4;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ffe0e9,
+            #ff9abb 45%,
+            #e75b8e
+        );
+
+}
+
+
+/* kanan */
+
+.petal-right {
+
+    right: 2px;
+
+    transform:
+        rotate(25deg);
+
+}
+
+
+/* belakang kiri */
+
+.petal-back-left {
+
+    left: 15px;
+
+    bottom: 19px;
+
+    width: 38px;
+
+    height: 66px;
+
+    z-index: 1;
+
+    transform:
+        rotate(-12deg);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #e879a0,
+            #d94c7e
+        );
+
+}
+
+
+/* belakang kanan */
+
+.petal-back-right {
+
+    right: 15px;
+
+    bottom: 19px;
+
+    width: 38px;
+
+    height: 66px;
+
+    z-index: 1;
+
+    transform:
+        rotate(12deg);
+
+    background:
+
+        linear-gradient(
+            225deg,
+            #e879a0,
+            #d94c7e
+        );
+
+}
+
+
+/* =====================================================
+   DETAIL TULIP
+===================================================== */
+
+.tulip-center {
+
+    position: absolute;
+
+    z-index: 5;
+
+    left: 50%;
+
+    top: 28px;
+
+    width: 10px;
+
+    height: 38px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        50%;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.3),
+            rgba(255,255,255,.05)
+        );
+
+    opacity: .5;
+
+}
+
+
+/* =====================================================
+   ANIMASI MEKAR
+===================================================== */
+
+@keyframes tulipBloom {
+
+    0% {
+
+        transform:
+
+            translateX(-50%)
+            scale(0)
+            rotate(-8deg);
+
+    }
+
+    55% {
+
+        transform:
+
+            translateX(-50%)
+            scale(1.12)
+            rotate(3deg);
+
+    }
+
+    80% {
+
+        transform:
+
+            translateX(-50%)
+            scale(.96)
+            rotate(-1deg);
+
+    }
+
+    100% {
+
+        transform:
+
+            translateX(-50%)
+            scale(1)
+            rotate(0);
+
+    }
+
+}
+
+
+/* =====================================================
+   PARTIKEL
+===================================================== */
+
+.particle {
+
+    position: absolute;
+
+    bottom: 4%;
+
+    left: var(--x);
+
+    width: var(--size);
+
+    height: var(--size);
+
+    border-radius: 50%;
+
+    background: #ffe5f1;
+
+    box-shadow:
+        0 0 12px #ff9bc4;
+
+    opacity: 0;
+
+    animation:
+
+        particleFloat
+        var(--duration)
+        ease-in-out
+        infinite;
+
+    animation-delay:
+        var(--delay);
+
+}
+
+
+.particle.heart {
+
+    width: auto;
+
+    height: auto;
+
+    background: none;
+
+    box-shadow: none;
+
+    color: #ff83b4;
+
+    font-size: var(--size);
+
+    text-shadow:
+        0 0 10px
+        rgba(255, 117, 173, .8);
+
+}
+
+
+@keyframes particleFloat {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(.5)
+            rotate(0);
+
+    }
+
+    15% {
+
+        opacity: .9;
+
+    }
+
+    80% {
+
+        opacity: .7;
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-75vh)
+            translateX(var(--drift))
+            scale(1.2)
+            rotate(25deg);
+
+    }
+
+}
+
+
+/* =====================================================
+   SURAT
+===================================================== */
+
+.letter-scene {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 25;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    padding-bottom: 9%;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform:
+        translateY(80px);
+
+    transition:
+
+        opacity 1.2s ease,
+
+        transform 1.2s ease;
+
+}
+
+
+.letter-scene.show {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+    pointer-events: auto;
+
+}
+
+
+.letter-hint {
+
+    position: absolute;
+
+    bottom:
+        calc(9% + 210px);
+
+    color: #ffdbe9;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(19px, 3vw, 27px);
+
+    opacity: 0;
+
+    animation:
+
+        hintIn 1s ease
+        1s forwards,
+
+        hintGlow 2s
+        ease-in-out
+        2s infinite alternate;
+
+}
+
+
+@keyframes hintIn {
+
+    to {
+
+        opacity: 1;
+
+    }
+
+}
+
+
+@keyframes hintGlow {
+
+    from {
+
+        text-shadow:
+            0 0 5px
+            rgba(255, 120, 180, .2);
+
+    }
+
+    to {
+
+        text-shadow:
+            0 0 20px
+            rgba(255, 120, 180, .75);
+
+    }
+
+}
+
+
+/* =====================================================
+   AMPLOP
+===================================================== */
+
+.envelope {
+
+    position: relative;
+
+    width:
+        min(350px, 76vw);
+
+    aspect-ratio:
+        1.55 / 1;
+
+    border: 0;
+
+    cursor: pointer;
+
+    background: #f6a4c4;
+
+    border-radius: 8px;
+
+    box-shadow:
+
+        0 18px 55px
+        rgba(0,0,0,.55),
+
+        0 0 35px
+        rgba(255, 104, 171, .24);
+
+    overflow: visible;
+
+    transition:
+        transform .35s ease;
+
+}
+
+
+.envelope:hover {
+
+    transform:
+        translateY(-7px)
+        scale(1.025);
+
+}
+
+
+.envelope-paper {
+
+    position: absolute;
+
+    z-index: 1;
+
+    left: 7%;
+
+    bottom: 4%;
+
+    width: 86%;
+
+    height: 86%;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #fff6fa,
+            #ffe8f1
+        );
+
+    border-radius: 4px;
+
+}
+
+
+.envelope-front {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 4;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            transparent 49.5%,
+            #ef91b7 50%
+        )
+        left bottom / 50% 100%
+        no-repeat,
+
+        linear-gradient(
+            225deg,
+            transparent 49.5%,
+            #ef91b7 50%
+        )
+        right bottom / 50% 100%
+        no-repeat;
+
+    border-radius: 8px;
+
+}
+
+
+.envelope-flap {
+
+    position: absolute;
+
+    z-index: 5;
+
+    left: 0;
+
+    top: 0;
+
+    width: 100%;
+
+    height: 70%;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #ffc0d8,
+            #ee8fb7
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
+
+    transform-origin: top;
+
+    transition:
+        transform .9s
+        cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+.envelope.open
+.envelope-flap {
+
+    transform:
+        rotateX(180deg);
+
+}
+
+
+.wax-heart {
+
+    position: absolute;
+
+    z-index: 8;
+
+    left: 50%;
+
+    top: 47%;
+
+    transform:
+        translate(-50%, -50%);
+
+    display: grid;
+
+    place-items: center;
+
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 50%;
+
+    color: white;
+
+    background: #df5c99;
+
+    box-shadow:
+        0 4px 12px
+        rgba(135, 37, 83, .3);
+
+    transition:
+
+        opacity .4s ease,
+
+        transform .5s ease;
+
+}
+
+
+.envelope.open .wax-heart {
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.3);
+
+}
+
+
+/* =====================================================
+   MODAL SURAT
+===================================================== */
+
+.letter-modal {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: grid;
+
+    place-items: center;
+
+    padding: 25px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity .7s ease;
+
+}
+
+
+.letter-modal.show {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+}
+
+
+.modal-backdrop {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(1, 2, 10, .78);
+
+    backdrop-filter:
+        blur(9px);
+
+}
+
+
+.love-letter {
+
+    position: relative;
+
+    width:
+        min(650px, 92vw);
+
+    max-height: 82vh;
+
+    overflow: auto;
+
+    padding:
+        clamp(32px, 6vw, 60px);
+
+    border-radius: 10px;
+
+    color: #693b51;
+
+    background:
+
+        radial-gradient(
+            circle at 10% 15%,
+            rgba(255, 173, 204, .2),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            135deg,
+            #fffafb,
+            #fff1f6
+        );
+
+    box-shadow:
+
+        0 25px 100px
+        rgba(0,0,0,.6),
+
+        0 0 45px
+        rgba(255, 105, 173, .2);
+
+    transform:
+        translateY(35px)
+        scale(.94);
+
+    transition:
+        transform .7s
+        cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+.letter-modal.show
+.love-letter {
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+
+.close-letter {
+
+    position: absolute;
+
+    right: 18px;
+
+    top: 13px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #b65d80;
+
+    font-size: 32px;
+
+    cursor: pointer;
+
+}
+
+
+.letter-decoration {
+
+    text-align: center;
+
+    color: #e46b9e;
+
+    font-size: 32px;
+
+    margin-bottom: 3px;
+
+}
+
+
+.letter-small {
+
+    text-align: center;
+
+    color: #bd7896;
+
+    font-size: 10px;
+
+    letter-spacing: .25em;
+
+    text-transform: uppercase;
+
+}
+
+
+.love-letter h1 {
+
+    margin: 7px 0 15px;
+
+    text-align: center;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(38px, 7vw, 58px);
+
+    color: #b74678;
+
+}
+
+
+.letter-line {
+
+    width: 80px;
+
+    height: 1px;
+
+    margin:
+        0 auto 25px;
+
+    background: #dc8eac;
+
+}
+
+
+.letter-text {
+
+    min-height: 180px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(20px, 3.2vw, 27px);
+
+    line-height: 1.65;
+
+    text-align: center;
+
+    white-space: pre-line;
+
+}
+
+
+.signature {
+
+    margin-top: 25px;
+
+    text-align: right;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 20px;
+
+    color: #9b5471;
+
+}
+
+
+.signature span {
+
+    font-size: 30px;
+
+    color: #df5c99;
+
+}
+
+
+/* =====================================================
+   REPLAY
+===================================================== */
+
+.replay {
+
+    position: absolute;
+
+    right: 18px;
+
+    bottom: 18px;
+
+    z-index: 50;
+
+    width: 42px;
+
+    height: 42px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius: 50%;
+
+    color: white;
+
+    background:
+        rgba(255,255,255,.06);
+
+    backdrop-filter:
+        blur(8px);
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+
+        opacity .4s ease,
+
+        transform .3s ease;
+
+}
+
+
+.replay.show {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+}
+
+
+.replay:hover {
+
+    transform:
+        rotate(-90deg)
+        scale(1.08);
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 650px) {
+
+    .moon {
+
+        width: 70px;
+
+        height: 70px;
+
+        right: 6%;
+
+        top: 7%;
+
+    }
+
+
+    .moon::after {
+
+        width: 70px;
+
+        height: 70px;
+
+    }
+
+
+    .tap-label {
+
+        margin-bottom: 35px;
+
+        letter-spacing: .23em;
+
+    }
+
+
+    .heart-button {
+
+        width: 105px;
+
+        height: 105px;
+
+    }
+
+
+    .heart-button::before,
+    .heart-button::after {
+
+        width: 105px;
+
+        height: 105px;
+
+    }
+
+
+    .heart-button::before {
+
+        top: -52px;
+
+    }
+
+
+    .heart-button::after {
+
+        left: 52px;
+
+    }
+
+
+    .heart-shine {
+
+        left: 23px;
+
+        top: 6px;
+
+        width: 17px;
+
+        height: 35px;
+
+    }
+
+
+    .opening-hint {
+
+        margin-top: 35px;
+
+    }
+
+
+    /* TULIP MOBILE */
+
+    .flower {
+
+        transform:
+            scaleY(0)
+            scaleX(
+                calc(var(--flower-scale) * .78)
+            );
+
+    }
+
+
+    .flower-head {
+
+        width: 82px;
+
+        height: 80px;
+
+    }
+
+
+    .tulip-petal {
+
+        width: 40px;
+
+        height: 65px;
+
+    }
+
+
+    .petal-center {
+
+        left: 21px;
+
+        width: 42px;
+
+        height: 70px;
+
+    }
+
+
+    .petal-back-left,
+    .petal-back-right {
+
+        width: 32px;
+
+        height: 55px;
+
+    }
+
+
+    .romantic-message {
+
+        top: 8%;
+
+    }
+
+
+    .romantic-message strong {
+
+        line-height: 1.05;
+
+    }
+
+
+    .letter-scene {
+
+        padding-bottom: 8%;
+
+    }
+
+
+    .letter-hint {
+
+        bottom:
+            calc(8% + 190px);
+
+    }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
+
+        transition-duration:
+            .01ms !important;
+
+    }
+
+}
